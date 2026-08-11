@@ -2,38 +2,32 @@
 
 Technician performance dashboard for Breathe-Easy (Hong Kong AC cleaning crew).
 
-**Artistic dashboard.** Functionally a metrics scoreboard. Visually at a high craft bar.
+**Artistic dashboard.** Functionally a metrics scoreboard. High visual craft on the Full Team hero.
 
 ## Status
 
 | Phase | Focus | Status |
 |-------|--------|--------|
 | 0 | Repo + shell | Done |
-| 1 | Design lock | Done (v1.1) |
-| 2 | Graphic assets | Done — pack ready |
-| 3 | Full Team view | Next |
-| 4 | Data layer | Pending |
+| 1 | Design lock | Done |
+| 2 | Graphic assets | Done |
+| 3 | Full Team view | Done |
+| 4 | Data layer polish | Next (already live-powered) |
 | 5 | Technician pages | Pending |
 | 6 | Competition | Pending |
 | 7 | Auth, mobile, polish | Pending |
 
-## Design
+## Live
 
-- **[DESIGN.md](DESIGN.md)** — product + visual rules  
-- **[ASSETS.md](ASSETS.md)** — skyline, water, rays, metallic system  
-- **`css/hero.css`** — live metallic numbers + hero stage + crew board
+Enable GitHub Pages if not already: Settings → Pages → branch `main` / root  
+**https://mydomshurt.github.io/breathe-easy-scoreboard/**
 
 ## Scope
 
-- **Technicians:** Matthew · Tiago · Nick · Alun · Iggi  
-- **Metrics:** Points, Pts/Day, Pts/Week, month, quarter  
-- **No revenue** · **English only**
+- Technicians: Matthew · Tiago · Nick · Alun · Iggi  
+- Metrics: Points, Pts/Day, Pts/Week context, month, quarter  
+- No revenue · English only
 
-## Legacy
+## Design
 
-`breathe-easy-dashboard` is reference only.
-
-## Live
-
-GitHub Pages: Settings → Pages → branch `main` / root  
-https://mydomshurt.github.io/breathe-easy-scoreboard/
+See DESIGN.md and ASSETS.md.

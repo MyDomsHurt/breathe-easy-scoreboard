@@ -7,18 +7,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/main.css?v=3" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
-  <div class="shell">
-    <header class="shell-header">
-      <div class="shell-brand">Breathe-Easy <span>Scoreboard</span></div>
-    </header>
-    <main class="shell-main">
-      <p class="shell-status">Phase 0 · Shell ready</p>
-      <p class="shell-note">Poster-first rebuild. Design lock is next.</p>
-    </main>
-  </div>
-  <script src="js/app.js"></script>
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#/team" class="nav-brand">Breathe-Easy <span>Scoreboard</span></a>
+      <div class="nav-links" id="nav-links"></div>
+    </div>
+  </nav>
+  <main class="main" id="app"></main>
+  <script src="js/assets.js?v=3"></script>
+  <script src="js/app.js?v=3"></script>
 </body>
 </html>
