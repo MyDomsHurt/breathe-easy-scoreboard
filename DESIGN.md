@@ -1,45 +1,61 @@
 # Breathe-Easy Scoreboard — Design Lock
 
-**Phase 1 · Version 1.0 · 11 August 2026**
+**Phase 1 · Version 1.1 · 11 August 2026**
 
-This document is the visual source of truth until revised by agreement.
+This document is the visual and product source of truth until revised by agreement.
 
 ---
 
 ## 1. Core statement
 
-Full Team is a **poster**, not a dashboard row.
+This is a **dashboard**.
 
-First glance must feel like a designed graphic object (championship / campaign energy), not a SaaS product screen.
+It shows metrics. It is interactive. Technicians use it to understand output, efficiency, and standing.
 
----
+The standard for how it *looks* is the same bar as a high-end poster or championship graphic — sculptural numbers, atmosphere, illustration quality, intentional hierarchy.  
+The standard for how it *works* is a clear performance dashboard: readable metrics, rankings, trends, personal stats.
 
-## 2. Locked reference direction
-
-**Primary reference (locked):**
-Silver-chrome sculptural team points number over crashing water, Hong Kong skyline in deep blue atmosphere, light rays, English mission block, dark vertical leaderboard with letter badges (M / T / N / A / I), impact metrics strip at base.
-
-**Secondary energy (allowed):**
-Gold / championship variant of the same structure when we want peak-motivation moments.
-
-**Not allowed as the hero:**
-Flat white cards, soft product chrome, generic KPI grids, pure CSS geometric skylines, Chinese copy.
+**Artistic execution. Dashboard function.**
 
 ---
 
-## 3. Colour system
+## 2. What this is not
+
+- Not a static poster or campaign image
+- Not a SaaS template with soft cards and hairline borders only
+- Not a marketing page
+
+It is an internal performance tool that refuses to look generic.
+
+---
+
+## 3. Visual direction (locked quality bar)
+
+Reference energy (not literal layout to copy pixel-for-pixel):
+
+- Dominant, physical-feeling points number (metallic / sculptural treatment)
+- Atmosphere: deep navy–blue stage, light, depth
+- Hong Kong context without turning the page into a postcard
+- Water / air motif used with restraint as visual support, not decoration for its own sake
+- Dark crew / ranking panel with letter badges (M · T · N · A · I)
+- Impact metrics that are scannable in seconds
+
+The page must still feel like a **working scoreboard**: change the scale (week / month / quarter), read rankings, drill into a technician, see week-by-week truth including zero weeks.
+
+---
+
+## 4. Colour system
 
 | Role | Value | Use |
 |------|--------|-----|
 | Brand navy | `#1F3F88` | Wordmark, deep panels |
-| Navy deep | `#0f1f4a` / `#06102a` | Poster stage, leaderboard |
-| Primary blue | `#0082C8` | UI accent, links, active states |
-| Cyan | `#5ec8f0` | Highlights, glow, secondary accent |
-| Stage | Deep blue gradients + atmosphere | Full Team poster background |
+| Navy deep | `#0f1f4a` / `#06102a` | Hero stage, ranking panels |
+| Primary blue | `#0082C8` | UI accent, active states |
+| Cyan | `#5ec8f0` | Highlights, glow |
 | Ink | `#0c1a33` | Body text on light surfaces |
 | Mute | `#5a6f8a` | Secondary labels |
 
-**Technician series (vivid, fixed):**
+**Technician series (fixed):**
 
 | Tech | Letter | Colour |
 |------|--------|--------|
@@ -49,64 +65,72 @@ Flat white cards, soft product chrome, generic KPI grids, pure CSS geometric sky
 | Alun | A | `#a855f7` |
 | Iggi | I | `#f97316` |
 
-Brand navy stays on the wordmark. Technician colour carries identity on badges and charts.
+Brand navy on the wordmark. Technician colour carries identity on badges and charts.
 
 ---
 
-## 4. Typography
+## 5. Typography
 
-- **Display / hero:** Heavy weight, tight tracking, used only for the sculptural points number and major poster headlines.
-- **UI / data:** Plus Jakarta Sans (or equivalent clean geometric sans), 500–800.
-- **Mission / story:** Slightly more expressive, still English only, short lines.
+- **Hero metrics:** Heavy weight, tight tracking — the numbers must feel important
+- **UI / data:** Plus Jakarta Sans (or equivalent), 500–800
+- **Labels / mission:** Short, English only, high clarity
 
-No decorative script fonts. No Chinese on technician-facing surfaces.
-
----
-
-## 5. Poster composition rules (Full Team)
-
-Required structure:
-
-1. **Stage** — atmospheric deep blue with illustrated skyline + light
-2. **Hero number** — dominant sculptural / metallic points total (the visual climax)
-3. **Water / air** — interacts with the number (splash, wrap, or crash)
-4. **Mission block** — short English statement
-5. **Impact strip** — 3–4 key team metrics
-6. **Crew board** — dark panel, letter badges, ranked order, team total
-
-Rules:
-- The number must feel physical (metal, stone, or strong 3D), not plain text
-- Charts and tables sit *below* the poster and stay quieter
-- Scale control (Week / Month / Quarter) updates numbers without breaking the composition
-- Zero-output weeks remain visible in data views
+No decorative script. No Chinese on technician-facing surfaces.
 
 ---
 
-## 6. What is forbidden
+## 6. Information architecture
 
-- Revenue anywhere in the UI
-- Chinese language on technician-facing pages
+| View | Job |
+|------|-----|
+| **Full Team** | Collective output + team ranking. Hero metrics + crew standings + supporting charts/tables |
+| **Technician (×5)** | Personal granular history: points, units by type, workdays, returns, trends including zero weeks |
+| **Competition** | Multi-metric rankings (Pts/Day, Pts/Week, month, quarter). Isolated in nav |
+
+Primary metrics everywhere: **Points**, **Pts/Day**, **Pts/Week**.  
+No revenue anywhere.
+
+---
+
+## 7. Full Team layout principles
+
+1. **Hero zone** — one dominant team points figure (sculptural treatment), period label, short status chips
+2. **Crew board** — ranked technicians with letter badges and the active metric
+3. **Impact row** — Pts/Day, workdays, units, returns (or equivalent) scannable at a glance
+4. **Supporting data** — weekly charts and tables *below*, quieter, fully functional
+5. **Scale control** — Week / Month / Quarter updates hero + rankings without a full page redesign
+
+Illustration and atmosphere support hierarchy. They do not replace metrics.
+
+---
+
+## 8. Forbidden
+
+- Revenue in the UI
+- Chinese on technician-facing pages
 - Josh in rankings or crew lists
-- Treating Full Team as a standard KPI card grid
-- Competing visual noise (too many equal-weight charts in the hero zone)
+- Treating the hero as pure decoration with weak numbers
+- Equal-weight chart noise competing with the main metrics
 - Patch-on-patch architecture from the legacy app
 
 ---
 
-## 7. Page roles
+## 9. Success test
 
-| Page | Visual role |
-|------|-------------|
-| Full Team | Poster-first. Illustration + sculptural number lead. |
-| Technician | Data-first, still on-brand. Quieter, personal, granular. |
-| Competition | Competitive boards. Isolated in nav. Clear rankings only. |
+A technician opens Full Team and within a few seconds can answer:
+
+- How is the team doing this period?
+- Who is ahead?
+- How am I doing relative to the crew?
+
+And the page still looks intentional and high-quality — not like a default admin template.
 
 ---
 
-## 8. Sign-off gate
+## 10. Sign-off
 
-Phase 1 is complete when the stakeholder agrees:
+Phase 1 is complete when the stakeholder agrees this framing:
 
-> “These references define what ‘stunning’ means for this project.”
+> Dashboard function. Poster-level craft. Metrics first.
 
-After sign-off, Phase 2 (graphic assets) begins using this lock as the brief for illustration production.
+Then Phase 2 (graphic assets) produces materials that serve a live, data-driven scoreboard — not a static artwork.

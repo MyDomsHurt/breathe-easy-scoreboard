@@ -2,16 +2,16 @@
 
 Technician performance dashboard for Breathe-Easy (Hong Kong AC cleaning crew).
 
-**Poster-first rebuild.** Full Team is designed as a visual statement; data and rankings support it.
+**Artistic dashboard.** Functionally a metrics scoreboard. Visually at the quality bar of a high-end poster.
 
 ## Status
 
 | Phase | Focus | Status |
 |-------|--------|--------|
 | 0 | Repo + shell | Done |
-| 1 | Design lock + references | Done — awaiting sign-off |
+| 1 | Design lock | Done (v1.1 — dashboard function, artistic craft) |
 | 2 | Graphic assets | Next |
-| 3 | Full Team poster | Pending |
+| 3 | Full Team view | Pending |
 | 4 | Data layer | Pending |
 | 5 | Technician pages | Pending |
 | 6 | Competition | Pending |
@@ -19,15 +19,17 @@ Technician performance dashboard for Breathe-Easy (Hong Kong AC cleaning crew).
 
 ## Design
 
-See **[DESIGN.md](DESIGN.md)** — locked colour system, poster rules, technician series, and forbidden patterns.
+See **[DESIGN.md](DESIGN.md)**.
 
-Primary reference direction: sculptural metallic team points number, water, Hong Kong skyline atmosphere, dark letter-badge leaderboard, English mission, impact strip.
+- Metrics and rankings are the product
+- Visual craft matches poster-level ambition (sculptural numbers, atmosphere, clear hierarchy)
+- Not a static poster; not a generic SaaS template
 
 ## Scope
 
 - **Technicians:** Matthew · Tiago · Nick · Alun · Iggi  
 - **Metrics:** Points, Pts/Day, Pts/Week, month, quarter  
-- **No revenue** anywhere in the UI  
+- **No revenue**  
 - **English only**
 
 ## Structure
@@ -39,15 +41,15 @@ Primary reference direction: sculptural metallic team points number, water, Hong
   css/
   js/
   data/
-  assets/          # illustrations land here in Phase 2
+  assets/
   README.md
 ```
 
 ## Legacy
 
-`breathe-easy-dashboard` is reference only. Do not continue patching it.
+`breathe-easy-dashboard` is reference only.
 
 ## Live
 
 Enable GitHub Pages: Settings → Pages → Deploy from branch `main` / root.  
-URL: https://mydomshurt.github.io/breathe-easy-scoreboard/
+https://mydomshurt.github.io/breathe-easy-scoreboard/
