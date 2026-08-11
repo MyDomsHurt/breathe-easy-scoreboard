@@ -1,0 +1,272 @@
+/* Breathe-Easy Scoreboard — hero / Full Team visual system
+   Phase 2 foundation. Dashboard metrics stay live; craft is CSS + assets. */
+
+:root {
+  --navy: #1F3F88;
+  --navy-deep: #0f1f4a;
+  --navy-stage: #06102a;
+  --blue: #0082C8;
+  --cyan: #5ec8f0;
+  --ink: #0c1a33;
+  --mute: #5a6f8a;
+  --font: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+
+  --tech-matthew: #2563eb;
+  --tech-tiago: #0ea5e9;
+  --tech-nick: #22c55e;
+  --tech-alun: #a855f7;
+  --tech-iggi: #f97316;
+}
+
+/* ── Metallic live metric number (sculptural, not plain text) ── */
+.metric-metal {
+  font-family: var(--font);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+  background: linear-gradient(
+    185deg,
+    #ffffff 0%,
+    #f0f8ff 18%,
+    #c8e0f5 48%,
+    #8ab8e0 78%,
+    #6a9ecc 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter:
+    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.95))
+    drop-shadow(0 2px 0 #c5dff5)
+    drop-shadow(0 4px 0 #7aadd8)
+    drop-shadow(0 7px 0 #4a8fc0)
+    drop-shadow(0 12px 28px rgba(0, 0, 0, 0.45))
+    drop-shadow(0 0 40px rgba(94, 200, 240, 0.35));
+}
+
+.metric-metal--lg {
+  font-size: clamp(2.8rem, 8vw, 5.2rem);
+}
+
+.metric-metal--md {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+}
+
+/* ── Full Team hero stage ── */
+.hero-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse 70% 50% at 85% 15%, rgba(94, 200, 240, 0.28), transparent 55%),
+    radial-gradient(ellipse 40% 40% at 10% 85%, rgba(0, 130, 200, 0.25), transparent 50%),
+    linear-gradient(165deg, #050d22 0%, #0a1838 25%, #122448 55%, #1a3a7a 100%);
+  color: #fff;
+  min-height: 320px;
+  box-shadow: 0 16px 48px rgba(15, 31, 74, 0.22);
+}
+
+.hero-stage__skyline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 55%;
+  background-image: url("../assets/skyline.jpg");
+  background-size: cover;
+  background-position: center bottom;
+  opacity: 0.55;
+  pointer-events: none;
+  mask-image: linear-gradient(to top, rgba 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba 55%, transparent 100%);
+}
+
+.hero-stage__rays {
+  position: absolute;
+  inset: 0;
+  background-image: url("../assets/light-rays.jpg");
+  background-size: cover;
+  background-position: top right;
+  opacity: 0.45;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.hero-stage__body {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 16px;
+  padding: 22px 24px 18px;
+  align-items: center;
+}
+
+.hero-stage__mission-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--cyan);
+  margin-bottom: 8px;
+}
+
+.hero-stage__mission {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.hero-stage__number-col {
+  text-align: center;
+  position: relative;
+}
+
+.hero-stage__kicker {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 6px;
+}
+
+.hero-stage__number-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-stage__splash {
+  position: absolute;
+  left: 50%;
+  bottom: -12%;
+  transform: translateX(-50%);
+  width: 120%;
+  max-width: 420px;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.hero-stage__splash img {
+  width: 100%;
+  height: auto;
+  display: block;
+  mix-blend-mode: screen;
+}
+
+.hero-stage__sub {
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.hero-stage__metrics {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 12px 18px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.2));
+}
+
+.hero-metric {
+  text-align: center;
+}
+
+.hero-metric__val {
+  font-size: 1.15rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+}
+
+.hero-metric__lab {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 2px;
+}
+
+/* ── Crew board (functional ranking panel) ── */
+.crew-board {
+  background: linear-gradient(165deg, #0a162f 0%, #122448 45%, #152a5c 100%);
+  border-radius: 24px;
+  padding: 18px 16px 14px;
+  color: #fff;
+  border: 1px solid rgba(94, 200, 240, 0.12);
+  box-shadow: 0 16px 48px rgba(15, 31, 74, 0.18);
+}
+
+.crew-board__title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.crew-board__sub {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--cyan);
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.crew-row {
+  display: grid;
+  grid-template-columns: 28px 22px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 6px;
+  border-radius: 10px;
+}
+
+.crew-row:first-child {
+  background: rgba(255, 213, 79, 0.08);
+}
+
+.crew-letter {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.crew-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+.crew-pts {
+  font-size: 14px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 800px) {
+  .hero-stage__body {
+    grid-template-columns: 1fr;
+  }
+  .hero-stage__number-col {
+    order: -1;
+  }
+  .hero-stage__metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
