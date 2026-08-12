@@ -1,1 +1,5 @@
-window.SCOREBOARD_ASSETS={skyline:"",water_splash:"",light_rays:""};
+window.SCOREBOARD_ASSETS = {
+  skyline: "",
+  water_splash: "",
+  light_rays: ""
+};
