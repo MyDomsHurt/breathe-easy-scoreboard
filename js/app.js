@@ -48,15 +48,79 @@ function badge(trend){
   const cls=x.includes('improv')?'up':x.includes('declin')?'down':'flat';
   return `<span class="trend-badge ${cls}">${trend||'Stable'}</span>`;
 }
-function pct(n){if(n==null||isNaN(n))return'\u2014';return (n>=0?'+':'')+fmt(n*100,0)+'%';}
 function setNav(active){document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')===active));}
-function assetUrl(key){const A=window.SCOREBOARD_ASSETS||{};return A[key]||'';}
+function skylineSvg(){
+  return `<svg class="skyline" viewBox="0 0 900 100" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+    <defs><linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.22)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.04)"/>
+    </linearGradient></defs>
+    <path fill="url(#skyGrad)" d="M0 100 V58 H14 V40 H24 V58 H38 V30 H48 V58 H62 V45 H72 V58 H88 V24 H100 V58 H116 V50 H128 V20 H140 V58 H156 V38 H170 V58 H186 V14 H200 V58 H218 V42 H232 V58 H250 V28 H264 V58 H282 V48 H296 V10 H314 V58 H332 V32 H346 V58 H364 V40 H378 V58 H396 V22 H412 V58 H428 V44 H442 V58 H460 V16 H476 V58 H494 V36 H508 V58 H526 V30 H540 V58 H558 V42 H572 V58 H590 V24 H604 V58 H622 V50 H636 V58 H654 V32 H668 V58 H686 V46 H700 V58 H718 V20 H734 V58 H752 V38 H766 V58 H784 V26 H798 V58 H816 V44 H830 V58 H848 V18 H864 V58 H882 V40 H896 V58 H900 V100 Z"/>
+    <path fill="rgba(255,255,255,0.08)" d="M0 100 V66 H50 V54 H100 V66 H150 V48 H200 V66 H250 V58 H300 V66 H350 V44 H400 V66 H450 V52 H500 V66 H550 V40 H600 V66 H650 V54 H700 V66 H750 V46 H800 V66 H850 V56 H900 V100 Z"/>
+  </svg>`;
+}
+function splashSvg(){
+  return `<svg class="hero-splash" viewBox="0 0 480 140" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <defs>
+      <linearGradient id="w1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(94,200,240,0.55)"/><stop offset="100%" stop-color="rgba(0,130,200,0.15)"/></linearGradient>
+      <linearGradient id="w2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(0,130,200,0.5)"/><stop offset="100%" stop-color="rgba(15,31,74,0.2)"/></linearGradient>
+    </defs>
+    <path fill="url(#w1)" d="M0 90 Q50 35 110 75 T220 55 T330 80 T440 50 T480 70 V140 H0 Z"/>
+    <path fill="url(#w2)" d="M0 105 Q70 50 140 90 T280 65 T400 95 T480 80 V140 H0 Z"/>
+    <path fill="rgba(255,255,255,0.28)" d="M10 115 Q90 70 160 105 T300 85 T420 110 T480 95 V140 H0 Z"/>
+    <path fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.8" d="M5 95 Q80 40 150 85 T290 60 T420 90"/>
+    <path fill="none" stroke="rgba(94,200,240,0.4)" stroke-width="1.2" d="M20 110 Q100 65 180 100 T320 75 T460 105"/>
+  </svg>`;
+}
 function renderTeam(){destroyCharts();setNav('#/team');const scale=TEAM_SCALE||'week';const stats=teamScaleStats(scale);const tw=teamWeekly();const labels=DATA.weekLabels||tw.map(r=>r.label);const names=techNames();const ranked=rankBy(scale==='month'?'month':scale==='quarter'?'quarter':'week');const metricLabel=scale==='month'?monthLabel(currentMonthKey()):scale==='quarter'?quarterLabel(currentQuarterKey()):'This week';
 let deltaClass='flat',deltaText='';if(scale==='week'&&stats.prevPoints!=null){const d=stats.points-stats.prevPoints;if(d>0.5){deltaClass='up';deltaText='\u2191 Up vs last week';}else if(d<-0.5){deltaClass='down';deltaText='\u2193 Down vs last week';}else{deltaClass='flat';deltaText='\u2192 Flat vs last week';}}
-const chips=[];if(deltaText)chips.push(`<span class="hero-chip ${deltaClass}">${deltaText}</span>`);if(stats.returns===0)chips.push('<span class="hero-chip clean">Zero returns</span>');else chips.push(`<span class="hero-chip">${fmt(stats.returns)} returns</span>`);
-const sky=assetUrl('skyline'),rays=assetUrl('light_rays'),splash=assetUrl('water_splash');
+const chips=[];if(deltaText)chips.push(`<span class="story-chip ${deltaClass}">${deltaText}</span>`);if(stats.returns===0)chips.push('<span class="story-chip clean">Zero returns</span>');else chips.push(`<span class="story-chip">${fmt(stats.returns)} returns</span>`);
 const scaleBtn=(id,label)=>`<button type="button" class="rank-mode-btn ${scale===id?'active':''}" data-scale="${id}">${label}</button>`;
-document.getElementById('app').innerHTML=`<div class="team-grid"><div class="hero-stage"><div class="hero-stage__skyline" style="${sky?`background-image:url('${sky}')`:''}"></div><div class="hero-stage__rays" style="${rays?`background-image:url('${rays}')`:''}"></div><div class="hero-top"><div><div class="hero-brand">Breathe-Easy</div><div class="hero-brand-sub">AC CLEANING CREW \u00b7 HONG KONG</div></div></div><div class="hero-body"><div><div class="hero-chips">${chips.join('')}</div></div><div class="hero-number-col"><div class="hero-kicker">\u2726 TEAM POINTS \u00b7 ${metricLabel.toUpperCase()}</div><div class="hero-number-wrap"><div class="metric-metal metric-metal--lg">${fmt(stats.points,1)}</div>${splash?`<div class="hero-splash"><img src="${splash}" alt="" /></div>`:''}</div></div></div><div class="hero-metrics"><div class="hero-metric"><div class="hero-metric__val">${fmt(stats.pointsDay,2)}</div><div class="hero-metric__lab">Pts / day</div></div><div class="hero-metric"><div class="hero-metric__val">${fmt(stats.days)}</div><div class="hero-metric__lab">Workdays</div></div><div class="hero-metric"><div class="hero-metric__val">${fmt(stats.units)}</div><div class="hero-metric__lab">Units</div></div><div class="hero-metric"><div class="hero-metric__val">${fmt(stats.returns)}</div><div class="hero-metric__lab">Returns</div></div></div></div><div class="crew-board"><div class="crew-board__title">\uD83C\uDFC6 LEADERBOARD</div><div class="crew-board__sub">crew standings \u00b7 ${metricLabel}</div><ol class="crew-list">${ranked.map((t,i)=>`<li class="crew-row"><span class="crew-letter" style="background:${t.color}">${LETTER[t.name]||t.name[0]}</span><span class="crew-rank">${i+1}</span><a class="crew-name" href="#/tech/${t.name}">${t.name.toUpperCase()}</a><span class="crew-pts">${fmt(t.value,1)}</span></li>`).join('')}</ol><div class="crew-total"><span>TEAM TOTAL</span><span>${fmt(ranked.reduce((s,t)=>s+t.value,0),1)}</span></div></div></div><div class="rank-modes" id="team-scales">${scaleBtn('week','This Week')}${scaleBtn('month',monthLabel(currentMonthKey()))}${scaleBtn('quarter',quarterLabel(currentQuarterKey()))}</div><div class="section"><div class="section-title">Weekly performance</div><div class="chart-grid"><div class="chart-card full"><h3>What we put up each week</h3><div class="chart-wrap hero"><canvas id="c1"></canvas></div></div><div class="chart-card"><h3>This week vs last week</h3><div class="chart-wrap"><canvas id="c0"></canvas></div></div><div class="chart-card"><h3>Pts / day vs team average</h3><div class="chart-wrap"><canvas id="c2"></canvas></div></div></div></div><div class="section"><div class="section-title">Week by week</div><div class="scroll-hint">Swipe for more \u2192</div><div class="table-wrap"><table class="wide"><thead><tr><th>Week</th><th class="num">Points</th><th class="num">Pts/Day</th><th class="num">Units</th><th class="num">Workdays</th><th class="num">Returns</th></tr></thead><tbody>${tw.map(w=>`<tr><td>${w.label}</td><td class="num"><strong>${fmt(w.points,1)}</strong></td><td class="num">${fmt(w.pointsDay,2)}</td><td class="num">${fmt(w.units)}</td><td class="num">${fmt(w.days)}</td><td class="num">${fmt(w.returns)}</td></tr>`).join('')}<tr class="total-row"><td>All weeks</td><td class="num">${fmt(DATA.team.totalPoints,1)}</td><td class="num">${fmt(DATA.team.avgPointsDay,2)}</td><td class="num">${fmt(DATA.team.totalUnits)}</td><td class="num">${fmt(DATA.team.totalDays)}</td><td class="num">${fmt(tw.reduce((s,w)=>s+w.returns,0))}</td></tr></tbody></table></div></div>`;
+document.getElementById('app').innerHTML=`
+<div class="ref-hero-grid">
+  <div class="team-story poster">
+    ${skylineSvg()}
+    <div class="poster-glow"></div>
+    <div class="poster-top-row">
+      <div class="poster-brand-block">
+        <div class="poster-logo-mark">Breathe-Easy</div>
+        <div class="poster-logo-sub">AC CLEANING CREW \u00b7 HONG KONG</div>
+      </div>
+    </div>
+    <div class="poster-main">
+      <div class="story-chips">${chips.join('')}</div>
+      <div class="story-hero-kicker">\u2726 TEAM POINTS \u00b7 ${metricLabel.toUpperCase()}</div>
+      <div class="story-hero-value-wrap">
+        <div class="story-hero-value">${fmt(stats.points,1)}</div>
+        ${splashSvg()}
+      </div>
+    </div>
+    <div class="poster-metrics">
+      <div class="p-metric"><div class="p-metric-val">${fmt(stats.pointsDay,2)}</div><div class="p-metric-lab">Pts / day</div></div>
+      <div class="p-metric"><div class="p-metric-val">${fmt(stats.days)}</div><div class="p-metric-lab">Workdays</div></div>
+      <div class="p-metric"><div class="p-metric-val">${fmt(stats.units)}</div><div class="p-metric-lab">Units</div></div>
+      <div class="p-metric"><div class="p-metric-val">${fmt(stats.returns)}</div><div class="p-metric-lab">Returns</div></div>
+    </div>
+  </div>
+  <div class="crew-board">
+    <div class="crew-board__title">\uD83C\uDFC6 LEADERBOARD</div>
+    <div class="crew-board__sub">crew standings \u00b7 ${metricLabel}</div>
+    <ol class="crew-list">${ranked.map((t,i)=>`<li class="crew-row"><span class="crew-letter" style="background:${t.color}">${LETTER[t.name]||t.name[0]}</span><span class="crew-rank">${i+1}</span><a class="crew-name" href="#/tech/${t.name}">${t.name.toUpperCase()}</a><span class="crew-pts">${fmt(t.value,1)}</span></li>`).join('')}</ol>
+    <div class="crew-total"><span>TEAM TOTAL</span><span>${fmt(ranked.reduce((s,t)=>s+t.value,0),1)}</span></div>
+  </div>
+</div>
+<div class="rank-modes" id="team-scales">${scaleBtn('week','This Week')}${scaleBtn('month',monthLabel(currentMonthKey()))}${scaleBtn('quarter',quarterLabel(currentQuarterKey()))}</div>
+<div class="section"><div class="section-title">Weekly performance</div>
+<div class="chart-grid">
+  <div class="chart-card full"><h3>What we put up each week</h3><div class="chart-wrap hero"><canvas id="c1"></canvas></div></div>
+  <div class="chart-card"><h3>This week vs last week</h3><div class="chart-wrap"><canvas id="c0"></canvas></div></div>
+  <div class="chart-card"><h3>Pts / day vs team average</h3><div class="chart-wrap"><canvas id="c2"></canvas></div></div>
+</div></div>
+<div class="section"><div class="section-title">Week by week</div><div class="scroll-hint">Swipe for more \u2192</div>
+<div class="table-wrap"><table class="wide"><thead><tr><th>Week</th><th class="num">Points</th><th class="num">Pts/Day</th><th class="num">Units</th><th class="num">Workdays</th><th class="num">Returns</th></tr></thead>
+<tbody>${tw.map(w=>`<tr><td>${w.label}</td><td class="num"><strong>${fmt(w.points,1)}</strong></td><td class="num">${fmt(w.pointsDay,2)}</td><td class="num">${fmt(w.units)}</td><td class="num">${fmt(w.days)}</td><td class="num">${fmt(w.returns)}</td></tr>`).join('')}
+<tr class="total-row"><td>All weeks</td><td class="num">${fmt(DATA.team.totalPoints,1)}</td><td class="num">${fmt(DATA.team.avgPointsDay,2)}</td><td class="num">${fmt(DATA.team.totalUnits)}</td><td class="num">${fmt(DATA.team.totalDays)}</td><td class="num">${fmt(tw.reduce((s,w)=>s+w.returns,0))}</td></tr>
+</tbody></table></div></div>`;
 document.getElementById('team-scales').addEventListener('click',e=>{const btn=e.target.closest('[data-scale]');if(!btn)return;TEAM_SCALE=btn.getAttribute('data-scale');renderTeam();});
 const latest=tw.length-1,prev=latest>0?latest-1:-1;
 charts.push(new Chart(document.getElementById('c0'),{type:'bar',data:{labels:prev>=0?[labels[prev],labels[latest]]:[labels[latest]],datasets:[{data:prev>=0?[tw[prev].points,tw[latest].points]:[tw[latest].points],backgroundColor:prev>=0?['#94a3b8','#0082C8']:['#0082C8'],borderRadius:8,barThickness:40}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(31,63,136,0.07)'}}}}}));
@@ -75,16 +139,11 @@ function renderTech(name){
   const unitTotals=t.unitTotals||{};
   const ranked=rankBy('day');
   const rank=ranked.findIndex(x=>x.name===name)+1;
-  const lead=ranked[0];
-  const gap=rank===1?null:(lead.value-(t.pointsDay||0));
   const weekPts=techWeekPts(name);
   const monthPts=techMonthPts(name);
-  const quarterPts=techQuarterPts(name);
   const ptsWeek=techPtsPerWeek(name,'all');
   const monthShort=monthLabel(currentMonthKey());
-  const quarterShort=quarterLabel(currentQuarterKey());
   const ownAvg=t.ownAvgPointsDay!=null?t.ownAvgPointsDay:(t.pointsDay||0);
-  const teamAvg=DATA.team.avgPointsDay||0;
   const labels=weeks.map(w=>w.weekLabel||w.week);
   const unitChips=unitOrder.filter(u=>(unitTotals[u]||0)>0).map(u=>`<div class="unit-chip"><div class="ut">${u}</div><div class="uv">${fmt(unitTotals[u])}</div></div>`).join('');
   document.getElementById('app').innerHTML=`
@@ -126,7 +185,6 @@ function renderCompete(){
     {id:'month',title:monthLabel(currentMonthKey()),mode:'month',fmt:(v)=>fmt(v,1)},
     {id:'quarter',title:quarterLabel(currentQuarterKey()),mode:'quarter',fmt:(v)=>fmt(v,1)}
   ];
-  const weekRanked=rankBy('week');
   document.getElementById('app').innerHTML=`
   <div class="compete-page">
     <header class="compete-header">
@@ -147,11 +205,7 @@ function renderCompete(){
 }
 function route(){
   const hash=location.hash||'#/team';
-  if(hash.startsWith('#/tech/')){
-    const name=decodeURIComponent(hash.slice(7));
-    renderTech(name);
-    return;
-  }
+  if(hash.startsWith('#/tech/')){renderTech(decodeURIComponent(hash.slice(7)));return;}
   if(hash==='#/compete'){renderCompete();return;}
   renderTeam();
 }
@@ -163,7 +217,7 @@ function buildNav(){
 async function boot(){
   buildNav();
   document.getElementById('app').innerHTML='<div class="loading">Loading scoreboard\u2026</div>';
-  const res=await fetch('data/data.json?v=7');
+  const res=await fetch('data/data.json?v=8');
   DATA=await res.json();
   window.addEventListener('hashchange',route);
   route();
